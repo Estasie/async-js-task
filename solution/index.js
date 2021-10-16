@@ -9,18 +9,16 @@ module.exports = (Homework) => {
             })
         }
 
-        let i = 0;
         let result = initialValue ? initialValue : 0;
 
         const arrLength = await promisify(asyncArray.length);
-        let isLess = await promisify(less, i, arrLength);
 
-        while (isLess) {
+
+        for (let i = 0; await promisify(less, i, arrLength); i = await promisify(add,i,1)){
             let curr = await promisify(asyncArray.get, i);
-            i = await promisify(add, i, 1);
-            isLess = await promisify(less, i, arrLength);
             result = await promisify(fn, result, curr, i, asyncArray);
         }
+
         return result;
     }
 
